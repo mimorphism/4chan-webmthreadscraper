@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import re
 
 
+#Change this to your download directory
 OUTPUT_DIR = 'D:\PROJECT\PYTHON'
 
 
@@ -16,17 +17,12 @@ def getURL(URL):
         return soup
     except requests.exceptions.HTTPError as e:
         print(e)
-    # links = soup.find_all("a", attrs={"class": "fileThumb"})
 
 
 def getFiles(soup):
-    # links = soup.find_all(href=re.compile("\.(png|jpg)$"))
     links = soup.find_all("a", attrs={"class": "fileThumb"})
-    # links = links1.find_all(href=re.compile("\.(png|jpg)$"))
     for link in links:
         href = link.get('href')
-        # href = BeautifulSoup.find_all(href=re.compile("\.(png|jpg)$"))
-        # links = soup.find_all("a", attrs={"class": "fileThumb"})
         try:
             href = 'http:' + href
             filename = os.path.join(OUTPUT_DIR, href.rsplit('/', 1)[-1])
